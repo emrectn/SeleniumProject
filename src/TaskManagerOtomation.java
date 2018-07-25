@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,6 +11,8 @@ public class TaskManagerOtomation {
 
 	public static void main(String[] args) {
 		
+		Logger logger = Logger.getLogger(TaskManagerOtomation.class.getName());
+		
 		System.out.println("Task Manager Otomation");
 		
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\emre.cetin\\Downloads\\chromedriver_win32\\chromedriver.exe");
@@ -17,10 +20,10 @@ public class TaskManagerOtomation {
 		
 		try {
 			driver.get("http://localhost:8080/admin");
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 
 			driver.get("http://localhost:8080/");
-			Thread.sleep(3000);
+			Thread.sleep(1000);
 			
 			if(driver.getCurrentUrl().equals("http://localhost:8080/login")) {
 				
@@ -48,17 +51,23 @@ public class TaskManagerOtomation {
 			for(WebElement navbarElement : navBarList) {
 				navbarElement.click();
 				Thread.sleep(4000);
+				if (counter == 0){
+					System.out.println("Page-index");
+				}
 				
-				if (counter == 1) {
+				else if (counter == 1) {
+
+					System.out.println("Page-add register");
+					
 					driver.findElement(By.id("tag")).sendKeys("Turkcell");
 					Thread.sleep(1000);
-					driver.findElement(By.id("type")).sendKeys("A01");
+					driver.findElement(By.id("cfp")).sendKeys("A01");
 					Thread.sleep(1000);
-					driver.findElement(By.id("value")).sendKeys("FTID001");
+					driver.findElement(By.id("ftid")).sendKeys("FTID001");
 					Thread.sleep(1000);
-					driver.findElement(By.id("is_Active")).sendKeys("TASK01");
+					driver.findElement(By.id("jiratask")).sendKeys("TASK01");
 					Thread.sleep(1000);
-					driver.findElement(By.id("app_name")).sendKeys("AppName");
+					driver.findElement(By.id("springt")).sendKeys("43");
 					
 					Select dropdown = new Select(driver.findElement(By.id("selected_costtype")));
 					dropdown.selectByIndex(1);
@@ -72,15 +81,25 @@ public class TaskManagerOtomation {
 					dropdown = new Select(driver.findElement(By.id("selected_status")));
 					dropdown.selectByIndex(1);
 					
+					driver.findElement(By.id("comment")).sendKeys("Test Otomasyon Deneme");
+					driver.findElement(By.className("btn-success")).click();
+					System.out.println("Kayıt Eklendi");
+					Thread.sleep(4000);
+
+					
 				}
 				else if (counter == 2) {
+
+					System.out.println("Page-delete");
 					
 				}
 				else if (counter == 3) {
+
+					System.out.println("Page-config");
 					
 				}
 				else {
-					System.out.println("Menude Hata Oluştu");
+					//System.out.println("Menude Hata Oluştu");
 				}
 				counter += 1;
 				Thread.sleep(4000);
